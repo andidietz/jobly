@@ -231,7 +231,7 @@ class User {
         [username]) 
     const user = validUserCheck.rows[0]
     if (!user) throw new NotFoundError(`No User Found: ${username}`)
-    const jobRes = await db.query(
+    await db.query(
       `INSERT INTO applications (job_id, username)
       VALUES ($1, $2)`, 
       [jobId, username])

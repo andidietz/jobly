@@ -56,14 +56,14 @@ class Company {
    */
 
   static async findAll(dataFilters) {
-    const query =`SELECT handle,
+    let query =`SELECT handle,
                   name,
                   description,
                   num_employees AS "numEmployees",
                   logo_url AS "logoUrl"
                 FROM companies`;
-    const whereSqlStatements = [];
-    const queryValues = [];
+    let whereSqlStatements = [];
+    let queryValues = [];
     
     const { minEmployees, maxEmployees, name } = dataFilters;
 
@@ -82,7 +82,7 @@ class Company {
       whereSqlStatements.push(`num_employees <= $${queryValues.length}`);
     }
 
-    if (name !== undefined) {
+    if (name) {
       queryValues.push(`%${name}%`);
       whereSqlStatements.push(`name ILIKE $${queryValues.length}`);
     };

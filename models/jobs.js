@@ -45,7 +45,7 @@ class Job {
    */
 
   static async findAll(dataFilters) {
-    const jobsRes = 
+    const query = 
       `SELECT title,
           salary,
           equity,

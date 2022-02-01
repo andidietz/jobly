@@ -1,18 +1,18 @@
 "use strict";
 
-const {
-  NotFoundError,
-  BadRequestError,
-  UnauthorizedError,
-} = require("../expressError");
+const request = require("supertest");
 const db = require("../db.js");
 const User = require("./user.js");
+
 const {
   commonBeforeAll,
   commonBeforeEach,
   commonAfterEach,
   commonAfterAll,
   testJobIds,
+  u1Token,
+  u2Token,
+  adminToken
 } = require("./_testCommon");
 
 beforeAll(commonBeforeAll);

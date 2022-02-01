@@ -53,10 +53,11 @@ router.post("/", ensureIsAdmin, async function (req, res, next) {
 
 router.get("/", async function (req, res, next) {
   try {
-    if(req.minEmployees !== undefined) {req.minEmployees = +req.minEmployees}
-    if(req.maxEmployees !== undefined) {req.maxEmployees = +req.maxEmployees}
+    let {minEmployees, maxEmployees} = req.query
+    if(minEmployees !== undefined) {minEmployees = +req.minEmployees}
+    if(maxEmployees !== undefined) {maxEmployees = +req.maxEmployees}
 
-    const validator = jsonschema.validate(req.body, companySearchSchema)
+    const validator = jsonschema.validate(req.query, companySearchSchema)
     if (!validator.valid) {
       const errs = validator.errors.map( err => err.stack);
       throw new BadRequestError(errs)

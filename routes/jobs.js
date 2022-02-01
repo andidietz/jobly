@@ -46,10 +46,11 @@ router.post("/", ensureIsAdmin, async function (req, res, next) {
 
  router.get("/", async function (req, res, next) {
     try {
-      if(req.minSalary !== undefined) {req.minSalary = +req.minSalary};
-      if(req.hasEquity !== undefined) {req.hasEquity = true};
+      const {minSalary, hasEquity} = req.query
+      if(minSalary !== undefined) {minSalary = +minSalary};
+      if(hasEquity !== undefined) {hasEquity === true};
 
-      const validator = jsonschema.validate(req.body, jobUSearchSchema);
+      const validator = jsonschema.validate(req.query, jobUSearchSchema);
       if (!validator.valid) {
         const errs = validator.errors.map( err => err.stack);
         throw new BadRequestError(errs)
